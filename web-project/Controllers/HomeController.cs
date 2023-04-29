@@ -6,11 +6,20 @@ namespace web_project.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly DatabaseContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(DatabaseContext context)
         {
-            _logger = logger;
+            _context = context;
+            if (Request?.Cookies["user_id"] != null)
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == int.Parse(Request.Cookies["user_id"]));
+                ViewData["isAdmin"] = user != null && user.PermissionLevel == 1;
+            }
+            else
+            {
+                ViewData["isAdmin"] = false;
+            }
         }
 
         public IActionResult Index()

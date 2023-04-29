@@ -1,0 +1,109 @@
+﻿@model Tuple<User, bool>
+@{
+    ViewData["Title"] = "Профіль";
+    var doucumentCount = Model.Item1.Passports?.Count ?? 0 + Model.Item1.DrivingLicences?.Count ?? 0 + Model.Item1.StudentCards?.Count ?? 0;
+    var header = Model.Item2 ? "Admin" : "User";
+}
+<div class="container">
+    <div class="card text-center" style="width:800px !important">
+        <div class="card-header">
+            @header
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@Model.Item1.FullName()</h5>
+            <p class="card-text text-muted">@Model.Item1.Email</p>
+        </div>
+        @{
+        if (Model.Item2)
+        {
+            <div class="card-footer text-body-secondary">
+                <a class="btn btn-info mb-2" asp-controller="User" asp-action="Index">Користувачі</a>
+                <a class="btn btn-primary mb-2" asp-controller="User" asp-action="AddPassport" asp-route-userId="@Model.Item1.Id">Додати паспорт</a>
+                <a class="btn btn-primary mb-2" asp-controller="User" asp-action="AddDrivingLicence" asp-route-userId="@Model.Item1.Id">Додати водійське посвідчення</a>
+                <a class="btn btn-primary" asp-controller="User" asp-action="AddStudentCard" asp-route-userId="@Model.Item1.Id">Додати студентський квиток</a>
+            </div>
+        }
+        }
+    </div>
+</div>
+<div class="container">
+    @{if (doucumentCount == 0)
+    {
+        <h3 class="my-5">Немає документів</h3>
+    }}
+    @{
+        if (Model.Item1.Passports != null)
+        {
+            foreach (var passport in Model.Item1.Passports)
+            {
+                var gender = passport.Gender ? "Жінка" : "Чоловік";
+
+                <div class="card" style="width: 18rem;">
+                <img src="\uploads\@passport.ImagePath" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Паспорт</h5>
+                    <p class="card-text">ПІБ: <span class="full-name">@Model.Item1.FullName()</span></p>
+                    <p class="card-text">Дата народження: <span class="birthdate">@passport.Birthdate.ToShortDateString()</span></p>
+                    <p class="card-text">Стать: <span class="gender">@gender</span></p>
+                    <p class="card-text">Національність: <span class="expiration-date">@passport.Nationality</span></p>
+                    @{
+                    if (Model.Item2)
+                    {
+                        <a class="btn btn-danger" asp-controller="User" asp-action="DeletePassport" asp-route-id="@passport.Id">Видалити</a>
+                    }
+                    }
+                </div>
+            </div>
+            }
+        }
+    }
+    @{
+        if (Model.Item1.DrivingLicences != null)
+        {
+            foreach (var drivingLicence in Model.Item1.DrivingLicences)
+            {
+                <div class="card" style="width: 18rem;">
+                <img src="\uploads\@drivingLicence.ImagePath" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Водійське посвідчення</h5>
+                    <p class="card-text">ПІБ: <span class="full-name">@Model.Item1.FullName()</span></p>
+                    <p class="card-text">Виданий: <span class="birthdate">@drivingLicence.IssueDate.ToShortDateString()</span></p>
+                    <p class="card-text">Недійсний: <span class="gender">@drivingLicence.ExpireDate.ToShortDateString()</span></p>
+                    <p class="card-text">Категорії: <span class="expiration-date">@drivingLicence.Categories</span></p>
+                    @{
+                    if (Model.Item2)
+                    {
+                        <a class="btn btn-danger" asp-controller="User" asp-action="DeleteDrivingLicence" asp-route-id="@drivingLicence.Id">Видалити</a>
+                    }
+                    }
+                </div>
+            </div>
+            }
+        }
+    }
+    @{
+        if (Model.Item1.StudentCards != null)
+        {
+            foreach (var studentCard in Model.Item1.StudentCards)
+            {
+                <div class="card" style="width: 18rem;">
+                <img src="\uploads\@studentCard.ImagePath" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Студентський квиток</h5>
+                    <p class="card-text">ПІБ: <span class="full-name">@Model.Item1.FullName()</span></p>
+                    <p class="card-text">Виданий: <span class="birthdate">@studentCard.IssueDate.ToShortDateString()</span></p>
+                    <p class="card-text">Недійсний: <span class="gender">@studentCard.ExpireDate.ToShortDateString()</span></p>
+                    <p class="card-text">Форма навчання: <span class="expiration-date">@studentCard.EduForm</span></p>
+                    <p class="card-text">Навчальний заклад: <span class="expiration-date">@studentCard.EduInstitution</span></p>
+                    @{
+                    if (Model.Item2)
+                    {
+                        <a class="btn btn-danger" asp-controller="User" asp-action="DeleteStudentCard" asp-route-id="@studentCard.Id">Видалити</a>
+                    }
+                    }
+                </div>
+            </div>
+            }
+        }
+    }
+</div>

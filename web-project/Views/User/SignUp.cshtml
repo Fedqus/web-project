@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Реєстрація документу";
+}
+<form class="form" method="post">
+    <p class="form-title">Реєстрація</p>
+    <div class="input-container">
+        <input placeholder="Електрона пошта" type="email" name="email">
+        <span>
+            <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+            </svg>
+          </span>
+    </div>
+    <div class="input-container">
+        <input placeholder="Ім'я" type="text" name="name">
+        <span>
+            <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+            </svg>
+          </span>
+    </div>
+    <div class="input-container">
+        <input placeholder="Прізвище" type="text" name="lastname">
+        <span>
+            <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+            </svg>
+          </span>
+    </div>
+    <div class="input-container">
+        <input placeholder="По батькові" type="text" name="middlename">
+        <span>
+            <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+            </svg>
+          </span>
+    </div>
+    <div class="form_group">
+        <div class="input-container">
+            <input placeholder="Пароль" type="password" id="first-password" name="password">
+            <span>
+            <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-pass" data-target="#first-password" >
+              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+              <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+            </svg>
+        </span>
+        </div>
+    </div>
+    <div class="form_group">
+        <div class="input-container">
+            <input placeholder="Повторіть пароль" type="password" id="second-password" name="re-password">
+            <span>
+            <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-pass" data-target="#second-password">
+              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+              <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+            </svg>
+        </span>
+        </div>
+    </div>
+    <button class="submit" type="submit">
+        Зареєструвати
+    </button>
+
+    <p class="sign-link">
+        У вас є акаунт ?
+        <a asp-controller="User" asp-action="Login">Увійти</a>
+    </p>
+</form>
+<script>
+    let btnPass = document.querySelectorAll('.btn-pass');
+
+    btnPass.forEach(function (btn) {
+        btn.onclick = function () {
+            let target = this.getAttribute('data-target'), inputPass = document.querySelector(target);
+            if (inputPass.getAttribute('type') === 'password') {
+                inputPass.setAttribute('type', 'text');
+                btn.style.opacity = "100%"
+            } else {
+                inputPass.setAttribute('type', 'password');
+                btn.style.opacity = "60%";
+            }
+        }
+    });
+</script>

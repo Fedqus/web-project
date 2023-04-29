@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Додаваня документу";
+}
+<div class="container">
+    <form class="form" method="post" enctype="multipart/form-data">
+        <div class="card" style="width: 18rem;">
+            <div style="width: 286px; height: 286px">
+                <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" style="margin: 6px 18px;"
+                     fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                </svg>
+                <input type="file" name="img">
+            </div>
+            <div class="card-body">
+                <label>Дата народження: </label>
+                <input type="date" name="birthdate">
+                <input type="text" placeholder="Національність" name="nationality">
+                <div>
+                    <label>Стать: </label>
+                    <select name="gender">
+                        <option value="false">Чоловік</option>
+                        <option value="true">Жінка</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class="submit" type="submit">
+                Додати документ
+            </button>
+            <button class="close">
+                <a href="documents.html" class="link-light link-offset-2 link-underline-opacity-0">Закрити</a>
+            </button>
+        </div>
+    </form>
+</div>
